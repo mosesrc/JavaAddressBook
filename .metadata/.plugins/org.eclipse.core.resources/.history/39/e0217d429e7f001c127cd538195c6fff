@@ -29,13 +29,12 @@ public class AddressBook {
 		emailList.put(count, email);
 
 		entryDatabase.add(new Entry(fName, lName, phnNum, email));
-		System.out.println("\nAdded new entry!\n");
+		System.out.println("Added new entry!\n");
 	}
 
 	public static void Quit(int value) {
 		// Exit program
-		System.out.println("\nExiting the program...");
-		value = 0;
+		System.out.println("Exiting the program");
 		System.exit(value);
 	}
 

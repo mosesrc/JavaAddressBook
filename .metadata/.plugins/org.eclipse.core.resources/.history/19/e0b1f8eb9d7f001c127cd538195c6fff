@@ -11,31 +11,30 @@ public class AddressBook {
 		Scanner input = new Scanner(System.in);
 
 		// Read First Name
-		System.out.print("\nFirst Name: ");
+		System.out.println("\nFirst Name: ");
 		String fName = input.next();
 
 		// Read Last Name
-		System.out.print("\nLast Name: ");
+		System.out.println("\nLast Name: ");
 		String lName = input.next();
 
 		// Read Phone Number
-		System.out.print("\nPhone Number: ");
+		System.out.println("\nPhone Number: ");
 		long phnNum = Long.parseLong(input.next());
 
 		// Read Email and assign it an id
-		System.out.print("\nEmail Address: ");
+		System.out.println("\nEmail Address: ");
 		String email = input.next();
 		count++;
 		emailList.put(count, email);
 
 		entryDatabase.add(new Entry(fName, lName, phnNum, email));
-		System.out.println("\nAdded new entry!\n");
+		System.out.println("\nAdded new entry!");
 	}
 
 	public static void Quit(int value) {
 		// Exit program
-		System.out.println("\nExiting the program...");
-		value = 0;
+		System.out.println("Exiting the program");
 		System.exit(value);
 	}
 
@@ -51,7 +50,7 @@ public class AddressBook {
 			System.out.println("4) Print Address Book\n");
 			System.out.println("5) Delete Book\n");
 			System.out.println("6) Quit\n");
-			System.out.print("Please choose what you'd like to do with the database: ");
+			System.out.println("Please choose what you'd like to do with the database: ");
 			value = Integer.parseInt(inputCase.next());
 
 			switch (value) {

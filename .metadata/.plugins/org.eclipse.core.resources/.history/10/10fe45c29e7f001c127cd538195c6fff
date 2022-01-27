@@ -35,7 +35,6 @@ public class AddressBook {
 	public static void Quit(int value) {
 		// Exit program
 		System.out.println("\nExiting the program...");
-		value = 0;
 		System.exit(value);
 	}
 
