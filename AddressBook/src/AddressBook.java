@@ -6,9 +6,10 @@ public class AddressBook {
 	private static ArrayList<Entry> entryDatabase = new ArrayList<>();
 	private static HashMap<Integer, String> emailList = new HashMap<>();
 	private static int count = 0;
+	private static Scanner input = new Scanner(System.in);
 
+	// Adding Entry
 	public static void addEntry() {
-		Scanner input = new Scanner(System.in);
 
 		// Read First Name
 		System.out.print("\nFirst Name: ");
@@ -32,11 +33,32 @@ public class AddressBook {
 		System.out.println("\nAdded new entry!\n");
 	}
 
-	public static void Quit(int value) {
+	public static void removeEntry() {
+		System.out.print("\nEnter an entry's email to remove: ");
+		String email = input.next();
+		Entry e = null;
+
+		for (Entry item : entryDatabase) {
+			if (item.get_email().contains(email)) {
+				System.out.println("\nDeleted the following entry: \n");
+				e = item;
+				System.out.println("************\n");
+				System.out.println(e);
+				System.out.println("\n************\n");
+				entryDatabase.remove(e);
+				break;
+			} 
+			else if (!(item.get_email().contains(email))) {
+				System.out.println("\nEntry was not found!!\n");
+				break;
+			}
+		}
+	}
+
+	public static void Quit() {
 		// Exit program
 		System.out.println("\nExiting the program...");
-		value = 0;
-		System.exit(value);
+		System.exit(0);
 	}
 
 	public static void main(String[] args) {
@@ -59,12 +81,18 @@ public class AddressBook {
 				addEntry();
 				break;
 
+			case 2:
+				removeEntry();
+				break;
+
 			default:
 				break;
 			}
 		} while (value != 6);
 
-		Quit(value);
+		if (value == 6) {
+			Quit();
+		}
 
 	}
 }

@@ -37,10 +37,14 @@ public class Entry {
 		return _email;
 	}
 	public void set_email(String _email) {
-		this._email = id + _email;
+		this._email = _email;
 	}
 	
 	//Constructors
+	public Entry() {
+		
+	}
+	
 	public Entry(String fName, String lName, long phnNum, String email) {
 		set_firstName(fName);
 		set_lastName(lName);
@@ -54,8 +58,10 @@ public class Entry {
 	
 	//toSting Override
 	public String toString() {
-		return get_firstName() + " " + get_lastName() + "\n" 
-				+ get_phoneNumber() + "\n" + get_email();
+		return "First Name: " + get_firstName() + "\n" +
+			   "Last Name: "+ get_lastName() + "\n" +
+			   "Phone Number: " + get_phoneNumber() + "\n" +
+			   "Email: " + get_email();
 	}
 	
 	//Methods ----->
