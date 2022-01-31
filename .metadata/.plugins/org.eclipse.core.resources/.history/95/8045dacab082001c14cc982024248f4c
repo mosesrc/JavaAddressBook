@@ -6,8 +6,7 @@ import java.util.Scanner;
 public class AddressBook implements Search {
 	private ArrayList<Entry> entryDatabase = new ArrayList<>();
 	private Scanner input = new Scanner(System.in);
-	private boolean found = true;
-	private boolean allFalse = true;
+	
 
 	// Adding Entry
 	public void addEntry() {
@@ -32,13 +31,14 @@ public class AddressBook implements Search {
 		System.out.println("\nAdded new entry!\n");
 	}
 
-	// Remove Entry -- found(boolean global variable)
+	// Remove Entry
 	public void removeEntry() {
 		System.out.print("\nEnter an entry's email to remove: ");
 		String email = input.next();
+		boolean attend = true;
 
 		for (int i = 0; i < entryDatabase.size(); i++) {
-			found = entryDatabase.get(i).get_email().trim().equals(email.trim());
+			attend = entryDatabase.get(i).get_email().trim().equals(email.trim());
 			if (entryDatabase.get(i).get_email().trim().equals(email.trim())) {
 				System.out.println("\nDeleted the following entry: \n");
 				System.out.println("************\n");
@@ -49,77 +49,65 @@ public class AddressBook implements Search {
 				break;
 			}
 		}
-		String result = found ? null : "\nEntry was not found!!\n";
+		String result = attend ? null : "\nEntry was not found!!\n";
 		if (result != null) {
 			System.out.println(result);
 		}
 	}
 
-	// Search inner methods -- found(boolean global variable)
+	// Search different type
 
 	public void searchFName(String value) {
-		found = false;
 		for (Entry item : entryDatabase) {
-			if (item.get_firstName().trim().contains(value.trim())) {
-				found = item.get_firstName().trim().contains(value.trim());
+			if (item.get_firstName().contains(value)) {
 				System.out.println("\n************\n");
 				System.out.println(item);
 				System.out.println("\n************\n");
-			}
-			String result = found ? null : "\nNo results found!!\n";
-			if (result != null) {
-				System.out.println(result);
+			} else if (!(item.get_firstName().contains(value))) {
+				System.out.println("\nNo results found!!\n");
+				break;
 			}
 		}
 	}
 
 	public void searchLName(String value) {
-		found = false;
 		for (Entry item : entryDatabase) {
-			if (item.get_lastName().trim().contains(value.trim())) {
-				found = item.get_lastName().trim().contains(value.trim());
+			if (item.get_lastName().contains(value)) {
 				System.out.println("************\n");
 				System.out.println(item);
 				System.out.println("\n************\n");
+			} else {
+				System.out.println("\nNo results found!!\n");
+				break;
 			}
-		}
-		String result = found ? null : "\nNo results found!!\n";
-		if (result != null) {
-			System.out.println(result);
 		}
 	}
 
 	public void searchPhnNum(String value) {
-		found = false;
+
 		for (Entry item : entryDatabase) {
 			String phnNum = Long.toString(item.get_phoneNumber());
-			if (phnNum.trim().contains(value.trim())) {
-				found = phnNum.trim().contains(value.trim());
+			if (phnNum.contains(value)) {
 				System.out.println("************\n");
 				System.out.println(item);
 				System.out.println("\n************\n");
+			} else {
+				System.out.println("\nNo results found!!\n");
+				break;
 			}
-		}
-		
-		String result = found ? null : "\nNo results found!!\n";
-		if (result != null) {
-			System.out.println(result);
 		}
 	}
 
 	public void searchEmail(String value) {
-		found = false;
 		for (Entry item : entryDatabase) {
-			if (item.get_email().trim().contains(value.trim())) {
-				found = item.get_email().trim().contains(value.trim());
+			if (item.get_email().contains(value)) {
 				System.out.println("************\n");
 				System.out.println(item);
 				System.out.println("\n************\n");
+			} else {
+				System.out.println("\nNo results found!!\n");
+				break;
 			}
-		}
-		String result = found ? null : "\nNo results found!!\n";
-		if (result != null) {
-			System.out.println(result);
 		}
 	}
 
@@ -177,9 +165,9 @@ public class AddressBook implements Search {
 
 	public void deleteBook() {
 		Iterator<Entry> entryIterator = entryDatabase.iterator();
-		while (entryIterator.hasNext()) {
-			entryIterator.next();
-			entryIterator.remove();
+		while(entryIterator.hasNext()) {
+			 entryIterator.next();
+			 entryIterator.remove();
 		}
 		System.out.println("\nAddress Book Cleared!!\n");
 	}

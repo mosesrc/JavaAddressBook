@@ -58,33 +58,35 @@ public class AddressBook implements Search {
 	// Search inner methods -- found(boolean global variable)
 
 	public void searchFName(String value) {
-		found = false;
 		for (Entry item : entryDatabase) {
+			found = item.get_firstName().trim().contains(value.trim());
 			if (item.get_firstName().trim().contains(value.trim())) {
-				found = item.get_firstName().trim().contains(value.trim());
 				System.out.println("\n************\n");
 				System.out.println(item);
 				System.out.println("\n************\n");
 			}
 			String result = found ? null : "\nNo results found!!\n";
-			if (result != null) {
+			if (result == null) {
+				// do nothing
+			} else if (found == false) {
 				System.out.println(result);
 			}
 		}
 	}
 
 	public void searchLName(String value) {
-		found = false;
 		for (Entry item : entryDatabase) {
+			found = item.get_lastName().trim().contains(value.trim());
 			if (item.get_lastName().trim().contains(value.trim())) {
-				found = item.get_lastName().trim().contains(value.trim());
 				System.out.println("************\n");
 				System.out.println(item);
 				System.out.println("\n************\n");
 			}
 		}
 		String result = found ? null : "\nNo results found!!\n";
-		if (result != null) {
+		if (result == null) {
+			// do nothing
+		} else if (found == false) {
 			System.out.println(result);
 		}
 	}
@@ -93,6 +95,12 @@ public class AddressBook implements Search {
 		found = false;
 		for (Entry item : entryDatabase) {
 			String phnNum = Long.toString(item.get_phoneNumber());
+			System.out.println();
+			System.out.println(phnNum.trim());
+			System.out.println("value: " + value.trim());
+			System.out.println(found);
+			System.out.println();
+
 			if (phnNum.trim().contains(value.trim())) {
 				found = phnNum.trim().contains(value.trim());
 				System.out.println("************\n");
@@ -108,17 +116,18 @@ public class AddressBook implements Search {
 	}
 
 	public void searchEmail(String value) {
-		found = false;
 		for (Entry item : entryDatabase) {
+			found = item.get_email().trim().contains(value.trim());
 			if (item.get_email().trim().contains(value.trim())) {
-				found = item.get_email().trim().contains(value.trim());
 				System.out.println("************\n");
 				System.out.println(item);
 				System.out.println("\n************\n");
 			}
 		}
 		String result = found ? null : "\nNo results found!!\n";
-		if (result != null) {
+		if (!found) {
+			// do nothing
+		} else if (found) {
 			System.out.println(result);
 		}
 	}
