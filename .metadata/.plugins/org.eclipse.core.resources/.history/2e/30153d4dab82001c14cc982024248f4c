@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class AddressBook implements Search {
 	private ArrayList<Entry> entryDatabase = new ArrayList<>();
 	private Scanner input = new Scanner(System.in);
-	
+	Iterator<Entry> entryIterator = entryDatabase.iterator();
 
 	// Adding Entry
 	public void addEntry() {
@@ -63,7 +63,7 @@ public class AddressBook implements Search {
 				System.out.println("\n************\n");
 				System.out.println(item);
 				System.out.println("\n************\n");
-			} else if (!(item.get_firstName().contains(value))) {
+			} else {
 				System.out.println("\nNo results found!!\n");
 				break;
 			}
@@ -164,10 +164,11 @@ public class AddressBook implements Search {
 	}
 
 	public void deleteBook() {
-		Iterator<Entry> entryIterator = entryDatabase.iterator();
 		while(entryIterator.hasNext()) {
-			 entryIterator.next();
-			 entryIterator.remove();
+			 Entry e = entryIterator.next();
+				if(e != null) {
+					entryIterator.remove();
+				}
 		}
 		System.out.println("\nAddress Book Cleared!!\n");
 	}

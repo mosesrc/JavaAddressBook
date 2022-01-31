@@ -63,7 +63,7 @@ public class AddressBook implements Search {
 				System.out.println("\n************\n");
 				System.out.println(item);
 				System.out.println("\n************\n");
-			} else if (!(item.get_firstName().contains(value))) {
+			} else {
 				System.out.println("\nNo results found!!\n");
 				break;
 			}
