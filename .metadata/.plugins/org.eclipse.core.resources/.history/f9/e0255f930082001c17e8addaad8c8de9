@@ -1,0 +1,7 @@
+
+public interface Search {
+	public String searchFName();
+	public String searchLName();
+	public Long searchPhnNum();
+	public String searchEmail();
+}

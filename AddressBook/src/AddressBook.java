@@ -2,14 +2,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class AddressBook {
-	private static ArrayList<Entry> entryDatabase = new ArrayList<>();
-	private static HashMap<Integer, String> emailList = new HashMap<>();
-	private static int count = 0;
-	private static Scanner input = new Scanner(System.in);
+public class AddressBook implements Search {
+	private ArrayList<Entry> entryDatabase = new ArrayList<>();
+	private Scanner input = new Scanner(System.in);
 
 	// Adding Entry
-	public static void addEntry() {
+	public void addEntry() {
 
 		// Read First Name
 		System.out.print("\nFirst Name: ");
@@ -23,45 +21,155 @@ public class AddressBook {
 		System.out.print("\nPhone Number: ");
 		long phnNum = Long.parseLong(input.next());
 
-		// Read Email and assign it an id
+		// Read Email
 		System.out.print("\nEmail Address: ");
 		String email = input.next();
-		count++;
-		emailList.put(count, email);
 
 		entryDatabase.add(new Entry(fName, lName, phnNum, email));
 		System.out.println("\nAdded new entry!\n");
 	}
 
-	public static void removeEntry() {
+	// Remove Entry
+	public void removeEntry() {
 		System.out.print("\nEnter an entry's email to remove: ");
 		String email = input.next();
-		Entry e = null;
+		boolean attend = true;
 
-		for (Entry item : entryDatabase) {
-			if (item.get_email().contains(email)) {
+		for (int i = 0; i < entryDatabase.size(); i++) {
+			attend = entryDatabase.get(i).get_email().trim().equals(email.trim());
+			if (entryDatabase.get(i).get_email().trim().equals(email.trim())) {
 				System.out.println("\nDeleted the following entry: \n");
-				e = item;
 				System.out.println("************\n");
-				System.out.println(e);
+				System.out.println(entryDatabase.get(i));
 				System.out.println("\n************\n");
-				entryDatabase.remove(e);
+				entryDatabase.remove(entryDatabase.get(i));
+				// entryDatabase.get(i).emailList.remove(entryDatabase.get(i).getId());
 				break;
-			} 
-			else if (!(item.get_email().contains(email))) {
-				System.out.println("\nEntry was not found!!\n");
+			}
+		}
+		String result = attend ? null : "\nEntry was not found!!\n";
+		if (result != null) {
+			System.out.println(result);
+		}
+	}
+
+	// Search different type
+
+	public void searchFName(String value) {
+		for (Entry item : entryDatabase) {
+			if (item.get_firstName().contains(value)) {
+				System.out.println("\n************\n");
+				System.out.println(item);
+				System.out.println("\n************\n");
+			} else {
+				System.out.println("\nNo results found!!\n");
 				break;
 			}
 		}
 	}
 
-	public static void Quit() {
-		// Exit program
-		System.out.println("\nExiting the program...");
-		System.exit(0);
+	public void searchLName(String value) {
+		for (Entry item : entryDatabase) {
+			if (item.get_lastName().contains(value)) {
+				System.out.println("************\n");
+				System.out.println(item);
+				System.out.println("\n************\n");
+			} else {
+				System.out.println("\nNo results found!!\n");
+				break;
+			}
+		}
+	}
+
+	public void searchPhnNum(String value) {
+
+		for (Entry item : entryDatabase) {
+			String phnNum = Long.toString(item.get_phoneNumber());
+			if (phnNum.contains(value)) {
+				System.out.println("************\n");
+				System.out.println(item);
+				System.out.println("\n************\n");
+			} else {
+				System.out.println("\nNo results found!!\n");
+				break;
+			}
+		}
+	}
+
+	public void searchEmail(String value) {
+		for (Entry item : entryDatabase) {
+			if (item.get_email().contains(value)) {
+				System.out.println("************\n");
+				System.out.println(item);
+				System.out.println("\n************\n");
+			} else {
+				System.out.println("\nNo results found!!\n");
+				break;
+			}
+		}
+	}
+
+	// Search Method
+	public void searchEntry() {
+		int searchInput = 0;
+		String val = null;
+
+		System.out.println("\n1) First Name");
+		System.out.println("\n2) Last Name");
+		System.out.println("\n3) Phone Number");
+		System.out.println("\n4) Email Address");
+
+		try {
+			System.out.print("\nChoose a search type: ");
+			searchInput = Integer.parseInt(input.next());
+			System.out.print("\nEnter your search:");
+			val = input.next();
+		} catch (Exception e) {
+			System.out.println("\nInvalid search option\n");
+		}
+
+		switch (searchInput) {
+		case 1:
+			searchFName(val);
+			break;
+
+		case 2:
+			searchLName(val);
+			break;
+
+		case 3:
+			searchPhnNum(val);
+			break;
+
+		case 4:
+			searchEmail(val);
+			break;
+		}
+	}
+
+	public void printWholeBook() {
+		int count = 0;
+		if (entryDatabase.size() != 0) {
+			for (Entry item : entryDatabase) {
+				System.out.println("\n*****************\n");
+				System.out.println((count + 1) + ") " + "EntryId: " + item.getId() + "\n" + item + "\n");
+				System.out.println("*****************\n");
+				count++;
+			}
+		} else if (entryDatabase.size() == 0) {
+			System.out.println("\nAddress Book is empty!\n");
+		}
+	}
+
+	public void deleteBook() {
+		for (int i = 0; i < entryDatabase.size(); i++) {
+			entryDatabase.remove(entryDatabase.get(i));
+		}
+		System.out.println("\nAddress Book Cleared!!\n");
 	}
 
 	public static void main(String[] args) {
+		AddressBook bookOne = new AddressBook();
 		Scanner inputCase = new Scanner(System.in);
 		int value;
 
@@ -78,20 +186,30 @@ public class AddressBook {
 
 			switch (value) {
 			case 1:
-				addEntry();
+				bookOne.addEntry();
 				break;
 
 			case 2:
-				removeEntry();
+				bookOne.removeEntry();
 				break;
 
-			default:
+			case 3:
+				bookOne.searchEntry();
 				break;
+
+			case 4:
+				bookOne.printWholeBook();
+				break;
+
+			case 5:
+				bookOne.deleteBook();
 			}
 		} while (value != 6);
 
 		if (value == 6) {
-			Quit();
+			// Exit program
+			System.out.println("\nExiting the program...");
+			System.exit(0);
 		}
 
 	}
