@@ -51,9 +51,7 @@ public class Entry {
 		set_phoneNumber(phnNum);
 		set_email(email);
 		id = count++;
-		
-		//call assign email
-//		assignEmailId();
+
 	}
 	
 	//toSting Override
@@ -63,15 +61,5 @@ public class Entry {
 			   "Phone Number: " + get_phoneNumber() + "\n" +
 			   "Email: " + get_email();
 	}
-	
-	//Methods ----->
-	
-//	//Assign unique ID to email
-//	public void assignEmailId() {
-//		HashMap<Integer, String> emailList = new HashMap<>();
-//		emailList.put(getId(),get_email());
-//	}
-	
-	
 	
 }
