@@ -46,7 +46,6 @@ public class AddressBook implements Search {
 	public void removeEntry() {
 		System.out.print("\nEnter an entry's email to remove: ");
 		String email = input.next();
-		found = false;
 
 		for (int i = 0; i < entryDatabase.size(); i++) {
 			found = entryDatabase.get(i).get_email().trim().equals(email.trim());
@@ -55,7 +54,7 @@ public class AddressBook implements Search {
 				System.out.println("************\n");
 				System.out.println(entryDatabase.get(i));
 				System.out.println("\n************\n");
-			    emailList.remove(entryDatabase.get(i).get_email());
+			    emailList.remove(entryDatabase.get(i).getId());
 				entryDatabase.remove(entryDatabase.get(i));
 				break;
 			}
@@ -64,7 +63,6 @@ public class AddressBook implements Search {
 		if (result != null) {
 			System.out.println(result);
 		}
-		
 	}
 
 	// Search inner methods -- found(boolean global variable)
@@ -193,7 +191,6 @@ public class AddressBook implements Search {
 			entryIterator.next();
 			entryIterator.remove();
 		}
-		emailList.clear();
 		System.out.println("\nAddress Book Cleared!!\n");
 	}
 

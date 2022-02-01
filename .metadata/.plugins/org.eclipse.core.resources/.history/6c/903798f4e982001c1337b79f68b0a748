@@ -5,11 +5,10 @@ import java.util.Scanner;
 
 public class AddressBook implements Search {
 	private ArrayList<Entry> entryDatabase = new ArrayList<>();
-	private HashMap<String, Entry> emailList = new HashMap<>();
-	Entry entryObj;
 	private Scanner input = new Scanner(System.in);
 	private boolean found = true;
-	
+	private boolean allFalse = true;
+
 	// Adding Entry
 	public void addEntry() {
 
@@ -28,25 +27,15 @@ public class AddressBook implements Search {
 		// Read Email
 		System.out.print("\nEmail Address: ");
 		String email = input.next();
-		
-		entryObj = new Entry(fName, lName, phnNum, email);
-		
-		entryDatabase.add(entryObj);
-		assignEmailId(entryObj);
+
+		entryDatabase.add(new Entry(fName, lName, phnNum, email));
 		System.out.println("\nAdded new entry!\n");
-			
 	}
-	
-	//Assign unique ID to email
-			public void assignEmailId(Entry e) {
-				emailList.put(e.get_email(), e);
-			}
 
 	// Remove Entry -- found(boolean global variable)
 	public void removeEntry() {
 		System.out.print("\nEnter an entry's email to remove: ");
 		String email = input.next();
-		found = false;
 
 		for (int i = 0; i < entryDatabase.size(); i++) {
 			found = entryDatabase.get(i).get_email().trim().equals(email.trim());
@@ -55,8 +44,8 @@ public class AddressBook implements Search {
 				System.out.println("************\n");
 				System.out.println(entryDatabase.get(i));
 				System.out.println("\n************\n");
-			    emailList.remove(entryDatabase.get(i).get_email());
 				entryDatabase.remove(entryDatabase.get(i));
+				// entryDatabase.get(i).emailList.remove(entryDatabase.get(i).getId());
 				break;
 			}
 		}
@@ -64,7 +53,6 @@ public class AddressBook implements Search {
 		if (result != null) {
 			System.out.println(result);
 		}
-		
 	}
 
 	// Search inner methods -- found(boolean global variable)
@@ -193,7 +181,6 @@ public class AddressBook implements Search {
 			entryIterator.next();
 			entryIterator.remove();
 		}
-		emailList.clear();
 		System.out.println("\nAddress Book Cleared!!\n");
 	}
 

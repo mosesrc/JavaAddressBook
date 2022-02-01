@@ -3,6 +3,7 @@ import java.util.HashMap;
 public class Entry {
 	
 	//Entry Variables
+	private HashMap<Integer, Object> emailList = new HashMap<>();
 	private String _firstName;
 	private String _lastName;
 	private long _phoneNumber;
@@ -11,6 +12,14 @@ public class Entry {
 	private int id = 0;
 	
 	//Getters and Setters
+	public HashMap<Integer, Object> getEmailList() {
+		return emailList;
+	}
+	
+	public void setEmailList(HashMap<Integer, Object> emailList) {
+		this.emailList = emailList;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -51,6 +60,7 @@ public class Entry {
 		set_phoneNumber(phnNum);
 		set_email(email);
 		id = count++;
+		
 
 	}
 	

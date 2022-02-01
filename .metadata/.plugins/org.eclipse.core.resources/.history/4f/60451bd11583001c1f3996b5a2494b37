@@ -3,6 +3,7 @@ import java.util.HashMap;
 public class Entry {
 	
 	//Entry Variables
+	private HashMap<Integer, Entry> emailList = new HashMap<>();
 	private String _firstName;
 	private String _lastName;
 	private long _phoneNumber;
@@ -11,6 +12,14 @@ public class Entry {
 	private int id = 0;
 	
 	//Getters and Setters
+	public HashMap<Integer, Entry> getEmailList() {
+		return emailList;
+	}
+	
+	public void setEmailList(HashMap<Integer, Entry> emailList) {
+		this.emailList = emailList;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -51,7 +60,9 @@ public class Entry {
 		set_phoneNumber(phnNum);
 		set_email(email);
 		id = count++;
-
+		
+//		Call assign email
+		assignEmailId();
 	}
 	
 	//toSting Override
@@ -61,5 +72,14 @@ public class Entry {
 			   "Phone Number: " + get_phoneNumber() + "\n" +
 			   "Email: " + get_email();
 	}
+	
+
+	
+	//Assign unique ID to email
+	public void assignEmailId() {
+		emailList.put(get_email(),new Entry(set_firstName(fName),set_lastName(lName),set_phoneNumber(phnNum),set_email(email));
+	}
+	
+	
 	
 }
